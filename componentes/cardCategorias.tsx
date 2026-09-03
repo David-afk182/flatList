@@ -1,24 +1,6 @@
 import { Link } from 'expo-router';
 import {View, StyleSheet, FlatList, Text, Touchable, TouchableOpacity, Image,} from 'react-native';
-import DadosDosFilmes from '../../componentes/coisas';
 
-const categorias = DadosDosFilmes();
-console.log(categorias);
- 
-export default function App() {
-    return (
- 
-      <View style={styles.backcolor}>
-        <FlatList
-          data={categorias}
-          keyExtractor={i => i.id}
-          renderItem={renderCategoria }
-        />
-      </View>
- 
-    );
-}
- 
 function renderCategoria({ item } : {item:any}) {
   return (
     <View>

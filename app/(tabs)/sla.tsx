@@ -1,5 +1,6 @@
 import {View, StyleSheet, FlatList, Text, Touchable, TouchableOpacity, Image, ImageBackground} from 'react-native';
-
+import DadosDosFilmes from '../../componentes/coisas';
+import { Link } from 'expo-router';
 
 export default function App() {
     return (
@@ -20,7 +21,16 @@ export default function App() {
           <Text style={styles.duracao}>Diretor: Christopher Nolan</Text>
           <Text style={styles.avaliacao}>Avaliação: 8.5/10</Text>
       </View>
-
+        <View style={styles.botaoContainer}>
+          <Link href="https://youtu.be/oHg5SJYRHA0?si=upSeTCosjOo_Q9u4">
+          <TouchableOpacity>
+            <Text style={styles.botao}>+ Adicionar à Lista</Text>
+          </TouchableOpacity>
+          </Link>
+          <TouchableOpacity>
+            <Text style={styles.botao}>▶ Assistir Trailer</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
 }
@@ -99,6 +109,24 @@ classificacao: {
   height: 50,
   marginHorizontal: 10,
   marginTop: 10,
+},
+
+botao: {
+  width: "100%",
+  marginHorizontal: 20,
+  marginTop: 15,
+  backgroundColor: "#e0e0e0",
+  color: "#1d1d1d",
+  padding: 10,
+  borderRadius: 6,
+  textAlign: "center",
+  fontWeight: "bold",
+},
+
+botaoContainer: {
+  width: "52%",
+  flexDirection: "row",
+  justifyContent: "space-between",
 },
 
 });    
