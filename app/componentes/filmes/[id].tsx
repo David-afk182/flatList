@@ -1,20 +1,30 @@
 import {View, StyleSheet, FlatList, Text, Touchable, TouchableOpacity, Image, ImageBackground} from 'react-native';
-import DadosDosFilmes from '../../componentes/coisas';
-import { Link } from 'expo-router';
+import DadosDosFilmes from '../coisas';
+import { Link, useLocalSearchParams } from 'expo-router';
 
-export default function App() {
+export default function Filme() {
+    const { id } = useLocalSearchParams();
+
+    const categorias = DadosDosFilmes();
+    const filmeEncontrado = categorias
+    .flatMap(categoria => categoria.filmes)
+    .find(f => f.id === id);
+    console.log("Filme encontrado:", filmeEncontrado);
+    const filme: Filmeprops = {
+    ...filmeEncontrado,
+    }
     return (
       <View style={styles.fundo}>
         <ImageBackground
-          source={require('../imagens/oppenheimer.jpg')}
+          source={{ uri: filme.Imagem }}
           style={styles.imagem}>
-            <Image source={require('../imagens/play.webp')} style={styles.play}
+            <Image source={require('../../imagens/play.webp')} style={styles.play}
             />
-            <Image source={require('../imagens/Classificação_Indicativa_14_anos.svg.webp')} style={styles.classificacao}
+            <Image source={require('../../imagens/Classificação_Indicativa_14_anos.svg.webp')} style={styles.classificacao}
             />
           </ImageBackground>
         <View style={styles.informacoes}>
-        <Text style={styles.titulo}>Oppenheimer</Text>
+        <Text style={styles.titulo}>{filme.titulo}</Text>
           <Text style={styles.descricao}>Descrição: Um retrato cinematográfico do físico Robert Oppenheimer, que liderou o Projeto Manhattan durante a Segunda Guerra Mundial.</Text>
           <Text style={styles.duracao}>Duração: 3h 15min</Text>
           <Text style={styles.duracao}>Gênero: Drama, História, Biografia</Text>
@@ -30,6 +40,14 @@ export default function App() {
           <TouchableOpacity>
             <Text style={styles.botao}>▶ Assistir Trailer</Text>
           </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.botao}>★ Avaliar</Text>
+          </TouchableOpacity>
+        <Link href="../../(tabs)index">
+          <TouchableOpacity>       
+              <Text style={styles.botao2}>🏠︎</Text>
+          </TouchableOpacity>
+          </Link>
         </View>
       </View>
     );
@@ -124,9 +142,21 @@ botao: {
 },
 
 botaoContainer: {
-  width: "52%",
+  width: "100%",
   flexDirection: "row",
-  justifyContent: "space-between",
+  gap: 15,
+},
+
+botao2: {
+  width: "50%",
+  marginHorizontal: 20,
+  marginTop: 15,
+  backgroundColor: "#e0e0e0",
+  color: "#1d1d1d",
+  padding: 10,
+  borderRadius: 20,
+  textAlign: "center",
+  fontWeight: "bold",
 },
 
 });    

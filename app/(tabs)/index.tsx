@@ -1,13 +1,13 @@
 import { Link } from 'expo-router';
 import {View, StyleSheet, FlatList, Text, Touchable, TouchableOpacity, Image,} from 'react-native';
-import DadosDosFilmes from '../../componentes/coisas';
+import DadosDosFilmes from '../componentes/coisas';
+import renderCategoria from '../componentes/cardCategorias';
 
 const categorias = DadosDosFilmes();
 console.log(categorias);
  
 export default function App() {
     return (
- 
       <View style={styles.backcolor}>
         <FlatList
           data={categorias}
@@ -18,41 +18,7 @@ export default function App() {
  
     );
 }
- 
-function renderCategoria({ item } : {item:any}) {
-  return (
-    <View>
-    <View style={styles.titulo}>
-      {item.titulo}
-      </View>
-      <FlatList
-      data={item.filmes}
-      keyExtractor={filme => filme.id}
-      horizontal={true}
-      // showsHorizontalScrollIndicator = {false}
-      // contentContainerStyle={{ paddingBottom: 40 }}
-      renderItem={({ item }) => (
-        <Link href='/sla'>
-       <TouchableOpacity style={styles.bott}>    
-          <View style={styles.filme}>
-            <Image 
-            source={{uri:item.Imagem}}
-            style={styles.imagem}
-            />
-              <Text style={styles.filmeTitulo}>{item.titulo}
-              </Text>
-           </View>
-           </TouchableOpacity>
-        </Link>
-      )}
-      />
-   
-    
-    </View>
-       
-    )
-}
- 
+
 const styles = StyleSheet.create({
  
     backcolor:{

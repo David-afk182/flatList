@@ -1,7 +1,10 @@
 import { Link } from 'expo-router';
 import {View, StyleSheet, FlatList, Text, Touchable, TouchableOpacity, Image,} from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
 
-function renderCategoria({ item } : {item:any}) {
+export default function renderCategoria({ item } : {item:any}) {
+  const id = useLocalSearchParams();
+  console.log(id);
   return (
     <View>
     <View style={styles.titulo}>
@@ -14,7 +17,7 @@ function renderCategoria({ item } : {item:any}) {
       // showsHorizontalScrollIndicator = {false}
       // contentContainerStyle={{ paddingBottom: 40 }}
       renderItem={({ item }) => (
-        <Link href='/sla'>
+        <Link href={`../../componentes/filmes/${item.id}`}>
        <TouchableOpacity style={styles.bott}>    
           <View style={styles.filme}>
             <Image 
@@ -29,7 +32,6 @@ function renderCategoria({ item } : {item:any}) {
       )}
       />
    
-    
     </View>
        
     )
@@ -84,3 +86,4 @@ const styles = StyleSheet.create({
   }
        
 });
+
